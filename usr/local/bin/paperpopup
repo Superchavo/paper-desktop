@@ -1,0 +1,14 @@
+#!/bin/bash
+# PaperPOPUPS Engine v1.0
+# Usage: paperpopup "Title" "Message" "Command"
+
+TITLE=$1
+TEXT=$2
+CMD=$3
+
+# Usamos YAD para que se vea igual que el About
+yad --title="$TITLE" --window-icon="fedora-logo-icon" \
+    --image="/usr/share/icons/hicolor/48x48/apps/fedora-logo-icon.png" \
+    --text="<big><b>$TITLE</b></big>\n\n$TEXT" \
+    --button="Cancel:1" --button="OK:0" --width=350 --center \
+    && bash -c "$CMD"

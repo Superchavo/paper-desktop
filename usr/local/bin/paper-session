@@ -1,0 +1,9 @@
+#!/bin/bash
+# 1. Generar el menú actualizado
+/usr/local/bin/paper-menu-gen
+# 2. Cargar recursos de terminal
+xrdb -merge ~/.Xresources
+# 3. Lanzar escritorio con iconos
+dbus-launch pcmanfm --desktop --profile paper &
+# 4. Iniciar JWM
+exec jwm
