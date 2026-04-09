@@ -1,39 +1,80 @@
 #!/bin/bash
-# Paper ENVIRONMENT - Installer
+# Paper ENVIRONMENT - Universal Installer
 # Developer: Superchavo
 
 echo "--------------------------------------------------"
 echo "   🚀 Installing Paper ENVIRONMENT (Bunker v1)   "
 echo "--------------------------------------------------"
 
-# 1. INSTALAR DEPENDENCIAS
-echo "[1/3] Downloading JWM, PCManFM, YAD and more..."
-su -c 'dnf install jwm pcmanfm yad xterm xdotool hicolor-icon-theme -y'
+# 1. DEPENDENCIES
+echo "[1/4] Installing system dependencies..."
+# This works on both Proot and Real Fedora PC
+if [ -x "$(command -v sudo)" ]; then
+    sudo dnf install jwm pcmanfm yad xterm xdotool hicolor-icon-theme adwaita-icon-theme -y
+else
+    su -c 'dnf install jwm pcmanfm yad xterm xdotool hicolor-icon-theme adwaita-icon-theme -y'
+fi
 
-# 2. CONFIGURAR SCRIPTS (Paper-Utils)
-echo "[2/3] Setting up Paper-Utils in /usr/local/bin..."
-# Usamos el directorio donde está el script para copiar los archivos
+# 2. BINARIES AND SCRIPTS
+echo "[2/4] Deploying Paper-Utils to /usr/local/bin..."
 CURRENT_DIR=$(pwd)
-su -c "cp $CURRENT_DIR/usr/local/bin/paper-* /usr/local/bin/"
-su -c "cp $CURRENT_DIR/usr/local/bin/paperpopup /usr/local/bin/"
-su -c 'chmod +x /usr/local/bin/paper-* /usr/local/bin/paperpopup'
 
-# 3. CONFIGURAR SETTINGS (JWM y Desktop)
-echo "[3/3] Applying Superchavo's custom settings..."
-# Copiamos la configuración de JWM al home del usuario
-cp $CURRENT_DIR/etc/skel/.jwmrc ~/.jwmrc
+# Function to copy with correct permissions
+install_script() {
+    if [ -x "$(command -v sudo)" ]; then
+        sudo cp "$1" /usr/local/bin/
+        sudo chmod +x /usr/local/bin/$(basename "$1")
+    else
+        su -c "cp $1 /usr/local/bin/ && chmod +x /usr/local/bin/$(basename $1)"
+    fi
+}
 
-# Crear el perfil de escritorio para PCManFM (para que no se vea vacío)
-mkdir -p ~/.config/pcmanfm/paper
-cat <<CONF > ~/.config/pcmanfm/paper/desktop-items-0.conf
+# Copying scripts from the repo folders
+install_script "$CURRENT_DIR/usr/local/bin/paper-session"
+install_script "$CURRENT_DIR/usr/local/bin/paper-about"
+install_script "$CURRENT_DIR/usr/local/bin/paper-menu-gen"
+install_script "$CURRENT_DIR/usr/local/bin/paperpopup"
+
+# 3. APPEARANCE SETTINGS (.Xresources)
+echo "[3/4] Optimizing UI rendering and Fonts..."
+cat <<XRES > ~/.Xresources
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.rgba: rgb
+Xft.autohint: 0
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+PaperTerminal*background: #1c1c1c
+PaperTerminal*foreground: #ffffff
+PaperTerminal*faceName: Monospace:size=10
+XRES
+
+# Apply Xresources if display is active
+if [ -n "$DISPLAY" ]; then
+    xrdb -merge ~/.Xresources
+fi
+
+# 4. DESKTOP CONFIGURATION
+echo "[4/4] Applying custom JWM and Desktop settings..."
+# Deploy .jwmrc from repo to home
+if [ -f "$CURRENT_DIR/etc/skel/.jwmrc" ]; then
+    cp "$CURRENT_DIR/etc/skel/.jwmrc" ~/.jwmrc
+fi
+
+# Setup PCManFM blue background
+mkdir -p ~/.config/pcmanfm/default
+cat <<PCMAN > ~/.config/pcmanfm/default/desktop-items-0.conf
 [*]
 desktop_bg_0=#004687
 desktop_fg_0=#ffffff
 desktop_shadow_0=#000000
 show_wm_menu=0
-CONF
+wallpaper_mode=color
+PCMAN
 
 echo "--------------------------------------------------"
-echo "   ✅ DONE! Your bunker is ready.               "
-echo "   Type 'paper-session' to start.               "
+echo "   ✅ INSTALLATION SUCCESSFUL!                  "
+echo "   Developer: Superchavo                        "
+echo "   Command: 'paper-session' to start the bunker "
 echo "--------------------------------------------------"
