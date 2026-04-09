@@ -1,6 +1,6 @@
 [paper-environment]
 name=Paper ENVIRONMENT - Custom Repository
-baseurl=https://raw.githubusercontent.com/Superchavo/paper-desktop/main/
+baseurl=https://raw.githubusercontent.com/Superchavo/paper-desktop/main/repo/
 enabled=1
 gpgcheck=0
 repo_gpgcheck=0
