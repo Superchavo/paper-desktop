@@ -3,80 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paper ENVIRONMENT | Lightweight Desktop for Fedora Proot</title>
+    <title>Paper Desktop | Official Repo</title>
     <style>
-        :root {
-            --fedora-blue: #3c6eb4;
-            --fedora-dark-blue: #294172;
-            --bg-gray: #f8f9fa;
-            --text-dark: #212529;
-            --code-bg: #2d2d2d;
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
         }
-        body { font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg-gray); color: var(--text-dark); line-height: 1.6; margin: 0; padding: 0; }
-        header { background: var(--fedora-blue); color: white; padding: 50px 20px; text-align: center; border-bottom: 5px solid var(--fedora-dark-blue); }
-        header h1 { margin: 0; font-size: 2.8em; font-weight: 300; }
-        header p { margin: 10px 0 0; font-size: 1.2em; opacity: 0.9; }
-        .container { max-width: 900px; margin: 40px auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        h2 { color: var(--fedora-dark-blue); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 40px; }
-        code { background: #eee; color: #d63384; padding: 2px 5px; border-radius: 4px; font-family: 'Consolas', monospace; }
-        .bash-box { background: var(--code-bg); color: #f8f8f2; padding: 20px; border-left: 6px solid var(--fedora-blue); overflow-x: auto; margin: 15px 0; border-radius: 5px; font-family: 'Consolas', 'Courier New', monospace; position: relative; }
-        .bash-box::after { content: "Terminal"; position: absolute; top: 5px; right: 10px; font-size: 0.7em; color: #777; }
-        .step-num { background: var(--fedora-blue); color: white; border-radius: 50%; width: 28px; height: 28px; display: inline-block; text-align: center; line-height: 28px; margin-right: 10px; font-weight: bold; }
-        .footer { margin-top: 60px; padding: 20px; border-top: 1px solid #eee; text-align: center; color: #666; font-size: 0.9em; }
-        a { color: var(--fedora-blue); text-decoration: none; font-weight: bold; }
-        a:hover { text-decoration: underline; }
+        .container {
+            max-width: 800px;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            background-color: #161b22;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        pre {
+            color: #58a6ff;
+            font-size: 12px;
+            line-height: 1.2;
+            overflow-x: auto;
+        }
+        h1 { color: #f0f6fc; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+        .status { color: #3fb950; font-weight: bold; }
+        .btn {
+            display: inline-block;
+            background-color: #238636;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .btn:hover { background-color: #2ea043; }
+        .info-box {
+            background: #0d1117;
+            padding: 15px;
+            border-left: 4px solid #58a6ff;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>📄 Paper ENVIRONMENT</h1>
-    <p>A professional Windows 10-style desktop experience optimized for Fedora Proot.</p>
-</header>
-
 <div class="container">
-    <p>Welcome to the official repository for <strong>Paper ENVIRONMENT</strong>. This project delivers a lightweight and productive graphical interface, specifically designed to run within Proot containers on ARM and x86 hardware.</p>
+    <pre>
+__________
+\______   \_____  ______   ___________
+ |     ___/\__  \ \____ \_/ __ \_  __ \
+ |    |     / __ \|  |_> >  ___/|  | \/
+ |____|    (____  /   __/ \___  >__|
+                \/|__|        \/
+    </pre>
 
-    <h2>🚀 Installation & Setup Guide</h2>
-    <p>Follow these steps in your Fedora terminal to install the environment correctly:</p>
+    <h1>Paper Desktop <span style="font-size: 0.5em; color: #8b949e;">v1.2</span></h1>
     
-    <div class="step">
-        <p><span class="step-num">1</span><strong>Add the Repository:</strong></p>
-        <div class="bash-box">
-            su -c 'curl -sL https://raw.githubusercontent.com/Superchavo/paper-desktop/main/paper-environment.repo -o /etc/yum.repos.d/paper-environment.repo'
-        </div>
+    <p>A lightweight desktop environment based on JWM, optimized for performance and simplicity.</p>
+
+    <div class="info-box">
+        <p><strong>Status:</strong> <span class="status">System Active</span></p>
+        <p><strong>Latest Release:</strong> paper-desktop-1.2-1.fc33.noarch.rpm</p>
+        <p><strong>Architecture:</strong> aarch64 / noarch</p>
     </div>
 
-    <div class="step">
-        <p><span class="step-num">2</span><strong>Install the Package:</strong></p>
-        <div class="bash-box">
-            su -c 'dnf clean all && dnf install paper-desktop -y'
-        </div>
-    </div>
+    <h3>Quick Installation:</h3>
+    <code>sudo dnf install ./repo/paper-desktop-1.2-1.fc33.noarch.rpm</code>
 
-    <div class="step">
-        <p><span class="step-num">3</span><strong>Initialize User Configuration:</strong></p>
-        <p>You must copy the base configuration to your home directory:</p>
-        <div class="bash-box">
-            cp /etc/skel/.jwmrc ~/.jwmrc
-        </div>
-    </div>
-
-    <div class="step">
-        <p><span class="step-num">4</span><strong>Launch the Environment:</strong></p>
-        <p>Set your VNC display variable and start the session manager:</p>
-        <div class="bash-box">
-            export DISPLAY=:1<br>
-            paper-session
-        </div>
-    </div>
-
-    <div class="footer">
-        Maintained by <strong>Superchavo (Mateo)</strong> | 2026<br>
-        Source code available on <a href="https://github.com/Superchavo/paper-desktop">GitHub</a>
-    </div>
+    <br><br>
+    <a href="repo/paper-desktop-1.2-1.fc33.noarch.rpm" class="btn">Download RPM (v1.2)</a>
+    
+    <hr style="border: 0; border-top: 1px solid #30363d; margin: 20px 0;">
+    <p style="font-size: 0.8em; color: #8b949e;">Developed by Superchavo | Powered by Fedora & JWM</p>
 </div>
 
 </body>
 </html>
-
