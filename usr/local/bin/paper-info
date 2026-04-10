@@ -1,0 +1,25 @@
+#!/usr/bin/bash
+# Paper Info Tool - Created by Superchavo
+
+# Colores (Opcional, para que resalte)
+BLUE='\033[0;34m'
+NC='\033[0m' # Sin color
+
+echo -e "${BLUE}"
+echo "__________"
+echo "\______   \_____  ______   ___________"
+echo " |     ___/\__  \ \____ \_/ __ \_  __ \\"
+echo " |    |     / __ \|  |_> >  ___/|  | \/"
+echo " |____|    (____  /   __/ \___  >__|"
+echo "                \/|__|        \/"
+echo -e "${NC}"
+echo "------------------------------------------------"
+echo "  SYSTEM:  Paper Env | Fedora 33"
+echo "  DEV:     Paper Env Dev: Superchavo"
+echo "  STATUS:  System Active"
+echo "------------------------------------------------"
+echo "  ARCH:    $(uname -m)"
+echo "  MEMORY:  $(free -h | awk '/^Mem:/ {print $3 "/" $2}')"
+echo "  SESSION: Running"
+echo "------------------------------------------------"
+
