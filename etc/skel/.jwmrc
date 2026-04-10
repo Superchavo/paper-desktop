@@ -1,0 +1,54 @@
+<JWM>
+    <WindowStyle>
+        <Font>Sans-10:bold</Font>
+        <Corner>0</Corner>
+        <Foreground>#FFFFFF</Foreground>
+        <Background>#0078D7</Background>
+        <Outline>#00FFFF</Outline>
+        <Active>
+            <Foreground>#FFFFFF</Foreground>
+            <Background>#005A9E</Background>
+            <Outline>#FFFFFF</Outline>
+        </Active>
+    </WindowStyle>
+
+    <Tray x="0" y="-1" height="48" layout="horizontal" valign="bottom" background="#333333">
+        <TrayButton icon="/usr/share/icons/Adwaita/48x48/mimetypes/text-x-generic.png">root:1</TrayButton>
+        
+        <Spacer width="10"/>
+        <TrayButton icon="/usr/share/icons/Adwaita/48x48/apps/utilities-terminal.png">exec:xterm</TrayButton>
+        <TrayButton icon="/usr/share/icons/Adwaita/48x48/places/folder.png">exec:pcmanfm</TrayButton>
+        
+        <Spacer width="10"/>
+        <TaskList maxwidth="400"/>
+        <Spacer width="10"/>
+        <Dock/>
+        <Clock format="%I:%M %p"><Font>Sans-10:bold</Font></Clock>
+    </Tray>
+
+    <RootMenu onroot="1">
+        <Menu icon="folder" label=" Accessories">
+            <Program icon="utilities-terminal" label=" Terminal">xterm</Program>
+            <Program icon="folder" label=" File Manager">pcmanfm</Program>
+        </Menu>
+        
+        <Menu icon="package-x-generic" label=" Applications">
+            <Include>/tmp/paper-menu.xml</Include>
+        </Menu>
+
+        <Separator/>
+        
+        <Program icon="help-about" label=" System Info">paper-info</Program>
+        <Program icon="preferences-desktop-mouse" label=" Mouse Settings">lxappearance</Program>
+        
+        <Separator/>
+        <Restart label=" Restart Paper Env"/>
+        <Exit label=" Exit Session" confirm="true"/>
+    </RootMenu>
+
+    <Key key="Return" mask="4">exec:xterm</Key>
+    <Key key="e" mask="4">exec:pcmanfm</Key>
+    <Key key="i" mask="4">exec:paper-info</Key>
+    <Key key="q" mask="4">close</Key>
+</JWM>
+
