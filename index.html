@@ -83,15 +83,15 @@ __________
     <div class="step">
         <p>1. Add the repository to your system by creating the config file:</p>
         <div class="terminal-box">
-            <pre>sudo nano /etc/yum.repos.d/paper-desktop.repo</pre>
+            <pre>sudo nano /etc/yum.repos.d/paper-environment.repo</pre>
         </div>
     </div>
 
     <div class="step">
         <p>2. Paste the following content into the file:</p>
         <div class="terminal-box">
-            <pre style="color: #79c0ff;">[paper-desktop]
-                name=Paper ENVIRONMENT - install the desktop by dnf install paper-desktop
+            <pre style="color: #79c0ff;">[paper-environment]
+name=Paper ENVIRONMENT - install the desktop by dnf install paper-desktop
 baseurl=https://raw.githubusercontent.com/Superchavo/paper-desktop/main/repo/
 enabled=1
 gpgcheck=0
