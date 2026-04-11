@@ -91,10 +91,13 @@ __________
         <p>2. Paste the following content into the file:</p>
         <div class="terminal-box">
             <pre style="color: #79c0ff;">[paper-desktop]
-name=Paper Desktop Repository
-baseurl=https://superchavo.github.io/paper-desktop/repo/
+                name=Paper ENVIRONMENT - install the desktop by dnf install paper-desktop
+baseurl=https://raw.githubusercontent.com/Superchavo/paper-desktop/main/repo/
 enabled=1
-gpgcheck=0</pre>
+gpgcheck=0
+repo_gpgcheck=0
+metadata_expire=1h
+</pre>
         </div>
     </div>
 
